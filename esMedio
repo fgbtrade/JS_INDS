@@ -1,0 +1,23 @@
+function es_medio_de(limites, n) {
+  // Separa los valores del arreglo en dos grupos: superiores e inferiores a 'n'.
+  const superiores = limites.filter(valor => valor >= n).sort((a, b) => a - b);
+  const inferiores = limites.filter(valor => valor < n).sort((a, b) => b - a);
+
+  let parMasCercano = [null, null,null];
+  let menorDiferencia = Infinity;
+
+  // Itera sobre los límites superiores e inferiores para encontrar el par óptimo.
+  for (const sup of superiores) {
+    for (const inf of inferiores) {
+      const puntoMedio = (sup + inf) / 2;
+      const diferencia = Math.abs(puntoMedio - n);
+
+      if (diferencia < menorDiferencia) {
+        menorDiferencia = diferencia;
+        parMasCercano = [inf, sup,menorDiferencia];
+      }
+    }
+  }
+
+  return parMasCercano;
+}
